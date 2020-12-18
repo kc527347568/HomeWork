@@ -1,0 +1,2 @@
+java -jar %~dp0\screenMatchPX.jar 720 1280 1080,1776;1920,1080;1184,720;960,540;854,480;800,480;pause
+pause
