@@ -1,0 +1,3 @@
+include ':shipei'
+include ':app'
+rootProject.name = "P7HomeWork"

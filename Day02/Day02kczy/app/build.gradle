@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.example.day02kczy"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //greendao配置
+    greendao {
+        //数据库版本号，升级时修改
+        schemaVersion 1
+        //生成的DAO，DaoMaster和DaoSession的包路径。默认与表实体所在的包路径相同
+        //.db前的是库名
+        daoPackage 'com.example.day02kczy.db'
+        //生成源文件的路径。默认源文件目录是在build目录中的(build/generated/source/greendao)
+        targetGenDir 'src/main/java'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    //greenDAO配置
+    implementation 'org.greenrobot:greendao:3.3.0' // add library
+    implementation 'org.greenrobot:greendao-generator:3.3.0'
+
+//网络
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'//Retrofit依赖
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0' // 可选依赖，解析json字符所用
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0' // 必要依赖，和Rxjava结合必须用到，下面会提到
+    implementation "io.reactivex.rxjava2:rxjava:2.1.3" // 必要rxjava2依赖
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1" // 必要rxandrroid依赖，切线程时需要用到
+
+//EventBus
+    implementation 'org.greenrobot:eventbus:3.2.0' //EventBus
+//@Subscribe   接收者
+
+    //Material Design分格控件的依赖，包含RecyclerView，Navigationview...很多控件
+    implementation 'com.android.support:design:30.0.4'
+
+//Glide图片框架
+    implementation 'com.github.bumptech.glide:glide:4.11.0'	// 图片加载框架依赖
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+//YC视频播放器
+//视频UI层，必须要有
+    implementation 'cn.yc:VideoPlayer:3.0.9'
+//视频缓存，如果不需要则可以不依赖
+    implementation 'cn.yc:VideoCache:3.0.5'
+//视频内核层，必须有
+    implementation 'cn.yc:VideoKernel:3.0.5'
+
+}
