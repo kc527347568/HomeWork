@@ -1,3 +1,0 @@
-include ':day03zuoye'
-include ':app'
-rootProject.name = "P4day03"
